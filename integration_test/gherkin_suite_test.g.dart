@@ -15,9 +15,114 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
   @override
   void onRun() {
     testFeature0();
+    testFeature1();
+    testFeature2();
   }
 
   void testFeature0() {
+    runFeature(
+      'Swiping:',
+      <String>['@tag'],
+      () {
+        runScenario(
+          'User can swipe cards left and right',
+          <String>['@tag', '@debug'],
+          (TestDependencies dependencies) async {
+            await runStep(
+              'Given I swipe right by 250 pixels on the "scrollable cards"`',
+              <String>[],
+              null,
+              dependencies,
+            );
+
+            await runStep(
+              'Then Then I expect the text "Page 2" to be present',
+              <String>[],
+              null,
+              dependencies,
+            );
+
+            await runStep(
+              'Given I swipe left by 250 pixels on the "scrollable cards"`',
+              <String>[],
+              null,
+              dependencies,
+            );
+
+            await runStep(
+              'Then Then I expect the text "Page 1" to be present',
+              <String>[],
+              null,
+              dependencies,
+            );
+          },
+          onBefore: () async => onBeforeRunFeature(
+            'Swiping',
+            <String>['@tag'],
+          ),
+          onAfter: () async => onAfterRunFeature(
+            'Swiping',
+          ),
+        );
+      },
+    );
+  }
+
+  void testFeature1() {
+    runFeature(
+      'Checking data:',
+      <String>['@tag'],
+      () {
+        runScenario(
+          'User can have data',
+          <String>['@tag', '@tag1'],
+          (TestDependencies dependencies) async {
+            await runStep(
+              'Given I have item with data',
+              <String>[
+                """{
+    "glossary": {
+        "title": "example glossary",
+        "GlossDiv": {
+            "title": "S",
+            "GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+                    "SortAs": "SGML",
+                    "GlossTerm": "Standard Generalized Markup Language",
+                    "Acronym": "SGML",
+                    "Abbrev": "ISO 8879:1986",
+                    "GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+                        "GlossSeeAlso": [
+                            "GML",
+                            "XML"
+                        ]
+                    },
+                    "GlossSee": "markup"
+                }
+            }
+        }
+    }
+}"""
+              ],
+              null,
+              dependencies,
+            );
+          },
+          onBefore: () async => onBeforeRunFeature(
+            'Checking data',
+            <String>['@tag'],
+          ),
+          onAfter: () async => onAfterRunFeature(
+            'Checking data',
+          ),
+        );
+      },
+    );
+  }
+
+  void testFeature2() {
     runFeature(
       'Creating todos:',
       <String>['@tag'],
