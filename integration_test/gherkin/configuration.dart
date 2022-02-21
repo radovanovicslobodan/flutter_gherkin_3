@@ -8,6 +8,7 @@ import 'package:gherkin/gherkin.dart';
 import 'hooks/reset_app_hook.dart';
 import 'steps/expect_todos_step.dart';
 import 'steps/multiline_string_with_formatted_json.dart';
+import 'steps/some_test_steps.dart';
 import 'steps/when_await_animation.dart';
 import 'steps/when_step_has_timeout.dart';
 import 'world/custom_world.dart';
@@ -18,10 +19,11 @@ FlutterTestConfiguration gherkinTestConfiguration =
     thenIExpectTheTodos,
     whenAnAnimationIsAwaited,
     whenStepHasTimeout,
-    givenTheData
+    givenTheData,
+    givenSampleData
   ],
 )
-      // ..tagExpression = '@debug'
+      ..tagExpression = '@test'
       ..hooks = [
         ResetAppHook(),
       ]

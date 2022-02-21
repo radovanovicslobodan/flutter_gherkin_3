@@ -17,6 +17,7 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
     testFeature0();
     testFeature1();
     testFeature2();
+    testFeature3();
   }
 
   void testFeature0() {
@@ -123,6 +124,34 @@ class _CustomGherkinIntegrationTestRunner extends GherkinIntegrationTestRunner {
   }
 
   void testFeature2() {
+    runFeature(
+      'Testing Flutter with Gherkin:',
+      <String>['@test'],
+      () {
+        runScenario(
+          'User have some test data',
+          <String>['@test'],
+          (TestDependencies dependencies) async {
+            await runStep(
+              'Given: I have some test data',
+              <String>["""SOME TEST DATA"""],
+              null,
+              dependencies,
+            );
+          },
+          onBefore: () async => onBeforeRunFeature(
+            'Testing Flutter with Gherkin',
+            <String>['@test'],
+          ),
+          onAfter: () async => onAfterRunFeature(
+            'Testing Flutter with Gherkin',
+          ),
+        );
+      },
+    );
+  }
+
+  void testFeature3() {
     runFeature(
       'Creating todos:',
       <String>['@tag'],
